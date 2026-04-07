@@ -32,22 +32,13 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 20px 28px;
+    padding: 16px 28px;
     border-bottom: 1px solid #eef2f6;
   }
 
-  .logo-mark {
-    width: 28px;
-    height: 28px;
-    border-radius: 6px;
-    background: linear-gradient(135deg, #127EBF, #123854);
-  }
-
-  .logo-text {
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 2.5px;
-    color: #123854;
+  .header img {
+    height: 32px;
+    width: auto;
   }
 
   .title-section {
@@ -231,7 +222,6 @@
     margin-top: 8px;
   }
 
-  /* Success state */
   .success-container {
     padding: 48px 28px;
     display: flex;
@@ -271,10 +261,9 @@
 <body>
 
 <div class="card">
-  <!-- Header -->
+  <!-- Shared Header -->
   <div class="header">
-    <div class="logo-mark"></div>
-    <span class="logo-text">MEDCURITY</span>
+    <img src="Medcurity_PMS485_CoolGray6.png" alt="Medcurity">
   </div>
 
   <!-- Form View -->
@@ -387,12 +376,8 @@
     </form>
   </div>
 
-  <!-- Success View -->
+  <!-- Success View (no duplicate header) -->
   <div id="successView" class="hidden">
-    <div class="header">
-      <div class="logo-mark"></div>
-      <span class="logo-text">MEDCURITY</span>
-    </div>
     <div class="success-container">
       <div class="check-circle">
         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -410,7 +395,6 @@
 
   let priority = 3;
 
-  // Custom type toggle
   document.getElementById("collateralType").addEventListener("change", function() {
     const custom = document.getElementById("customType");
     if (this.value === "Custom / Other") {
@@ -421,7 +405,6 @@
     }
   });
 
-  // Priority buttons
   document.getElementById("priorityRow").addEventListener("click", function(e) {
     const btn = e.target.closest(".priority-btn");
     if (!btn) return;
@@ -430,7 +413,6 @@
     btn.classList.add("active");
   });
 
-  // Form submit
   document.getElementById("requestForm").addEventListener("submit", async function(e) {
     e.preventDefault();
 
@@ -480,7 +462,6 @@
     }
   });
 
-  // Reset
   document.getElementById("resetBtn").addEventListener("click", function() {
     document.getElementById("requestForm").reset();
     document.getElementById("customType").classList.add("hidden");
