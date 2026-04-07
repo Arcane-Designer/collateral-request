@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medcurity Collateral Request</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 32px 16px;
+    background: linear-gradient(135deg, #0e2a42 0%, #123854 40%, #1a4a6e 100%);
+    font-family: 'Open Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 560px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.15), 0 1px 3px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 28px;
+    border-bottom: 1px solid #eef2f6;
+  }
+
+  .logo-mark {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, #127EBF, #123854);
+  }
+
+  .logo-text {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    color: #123854;
+  }
+
+  .title-section {
+    padding: 24px 28px 8px;
+  }
+
+  .title-section h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #121212;
+    margin: 0 0 6px 0;
+    letter-spacing: -0.3px;
+  }
+
+  .title-section p {
+    font-size: 14px;
+    color: #5F5F5F;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .form-body {
+    padding: 16px 28px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+    letter-spacing: 0.2px;
+  }
+
+  .required { color: #CC3333; font-weight: 400; }
+
+  .select-wrapper {
+    position: relative;
+    border-radius: 8px;
+    border: 1.5px solid #d4dae0;
+    background: #fff;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+
+  .select-wrapper:focus-within {
+    border-color: #127EBF;
+    box-shadow: 0 0 0 3px rgba(18,126,191,0.1);
+  }
+
+  select {
+    width: 100%;
+    padding: 10px 36px 10px 12px;
+    font-size: 14px;
+    color: #333;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    outline: none;
+    font-family: inherit;
+  }
+
+  .select-arrow {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  input[type="text"], textarea {
+    padding: 10px 12px;
+    font-size: 14px;
+    color: #333;
+    border: 1.5px solid #d4dae0;
+    border-radius: 8px;
+    background: #fff;
+    outline: none;
+    font-family: inherit;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+
+  input[type="text"]:focus, textarea:focus {
+    border-color: #127EBF;
+    box-shadow: 0 0 0 3px rgba(18,126,191,0.1);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 72px;
+  }
+
+  .priority-row {
+    display: flex;
+    gap: 8px;
+  }
+
+  .priority-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 10px 4px 8px;
+    border: 1.5px solid #d4dae0;
+    border-radius: 8px;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: inherit;
+  }
+
+  .priority-btn:hover {
+    border-color: #a0b8cc;
+  }
+
+  .priority-btn.active {
+    border-color: #127EBF;
+    background: #EEF6FC;
+    box-shadow: 0 0 0 2px rgba(18,126,191,0.15);
+  }
+
+  .priority-num {
+    font-size: 16px;
+    font-weight: 700;
+    color: #999;
+    transition: color 0.15s;
+  }
+
+  .priority-btn.active .priority-num { color: #127EBF; }
+
+  .priority-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: color 0.15s;
+  }
+
+  .priority-btn.active .priority-label { color: #127EBF; }
+
+  .submit-btn {
+    padding: 12px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(135deg, #127EBF, #0e6ba3);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+    margin-top: 4px;
+  }
+
+  .submit-btn:hover { filter: brightness(1.08); }
+
+  .submit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: none;
+  }
+
+  .error-text {
+    font-size: 13px;
+    color: #CC3333;
+    text-align: center;
+  }
+
+  .custom-type-input {
+    margin-top: 8px;
+  }
+
+  /* Success state */
+  .success-container {
+    padding: 48px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .check-circle {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4A8E6E, #3a7a5e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .success-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #121212;
+  }
+
+  .success-text {
+    font-size: 14px;
+    color: #5F5F5F;
+    text-align: center;
+    line-height: 1.6;
+    max-width: 360px;
+    margin-bottom: 12px;
+  }
+
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <!-- Header -->
+  <div class="header">
+    <div class="logo-mark"></div>
+    <span class="logo-text">MEDCURITY</span>
+  </div>
+
+  <!-- Form View -->
+  <div id="formView">
+    <div class="title-section">
+      <h1>Collateral Request</h1>
+      <p>Need a marketing asset? Fill this out and we'll get it built.</p>
+    </div>
+
+    <form id="requestForm" class="form-body">
+      <!-- Name -->
+      <div class="field-group">
+        <label>Your Name <span class="required">*</span></label>
+        <div class="select-wrapper">
+          <select id="name" required>
+            <option value="">Select your name</option>
+            <option>Amelia Fairchild</option>
+            <option>Brayden Frost</option>
+            <option>Dan Fairchild</option>
+            <option>Joe Gellatly</option>
+            <option>Jordan Mayer</option>
+            <option>Jordan Scherich</option>
+            <option>Kendall Wood</option>
+            <option>Makena Dashiell</option>
+            <option>Margaret Karatzas</option>
+            <option>Molly Miller</option>
+            <option>Nathan Gellatly</option>
+            <option>Rachel Kunkel</option>
+            <option>Summer Hume</option>
+          </select>
+          <div class="select-arrow">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="#667" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Collateral Type -->
+      <div class="field-group">
+        <label>What do you need? <span class="required">*</span></label>
+        <div class="select-wrapper">
+          <select id="collateralType" required>
+            <option value="">Select collateral type</option>
+            <option>One-Pager</option>
+            <option>Battle Card</option>
+            <option>Case Study</option>
+            <option>ROI Calculator</option>
+            <option>Email Template</option>
+            <option>Presentation / Deck</option>
+            <option>Social Media Asset</option>
+            <option>Whitepaper / Guide</option>
+            <option>Custom / Other</option>
+          </select>
+          <div class="select-arrow">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="#667" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+        <input type="text" id="customType" class="custom-type-input hidden" placeholder="Describe what you need">
+      </div>
+
+      <!-- Audience -->
+      <div class="field-group">
+        <label>Who is it for? <span class="required">*</span></label>
+        <div class="select-wrapper">
+          <select id="audience" required>
+            <option value="">Select audience</option>
+            <option>Small Practice</option>
+            <option>FQHC</option>
+            <option>Rural Hospital</option>
+            <option>Partner</option>
+            <option>General</option>
+          </select>
+          <div class="select-arrow">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="#667" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Partner or Event -->
+      <div class="field-group">
+        <label>Is this for a specific partner or event?</label>
+        <input type="text" id="partnerOrEvent" placeholder="e.g., TeamLogic IT, NACHC Conference">
+      </div>
+
+      <!-- Usage -->
+      <div class="field-group">
+        <label>How will you use this? <span class="required">*</span></label>
+        <input type="text" id="usage" required placeholder="e.g., Sending to prospect after demo, partner co-brand for their clients">
+      </div>
+
+      <!-- Priority -->
+      <div class="field-group">
+        <label>Priority</label>
+        <div class="priority-row" id="priorityRow">
+          <button type="button" class="priority-btn" data-val="1"><span class="priority-num">1</span><span class="priority-label">Low</span></button>
+          <button type="button" class="priority-btn" data-val="2"><span class="priority-num">2</span><span class="priority-label">Moderate</span></button>
+          <button type="button" class="priority-btn active" data-val="3"><span class="priority-num">3</span><span class="priority-label">Standard</span></button>
+          <button type="button" class="priority-btn" data-val="4"><span class="priority-num">4</span><span class="priority-label">High</span></button>
+          <button type="button" class="priority-btn" data-val="5"><span class="priority-num">5</span><span class="priority-label">Urgent</span></button>
+        </div>
+      </div>
+
+      <!-- Notes -->
+      <div class="field-group">
+        <label>Additional Notes</label>
+        <textarea id="notes" placeholder="Anything else we should know?" rows="3"></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">Submit Request</button>
+      <p class="error-text hidden" id="errorMsg">Something went wrong. Try again, or email your request directly.</p>
+    </form>
+  </div>
+
+  <!-- Success View -->
+  <div id="successView" class="hidden">
+    <div class="header">
+      <div class="logo-mark"></div>
+      <span class="logo-text">MEDCURITY</span>
+    </div>
+    <div class="success-container">
+      <div class="check-circle">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="success-title">Request Submitted</div>
+      <p class="success-text">Got it. We'll review within one business day and follow up on timeline.</p>
+      <button class="submit-btn" id="resetBtn">Submit Another Request</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const FORMSPREE = "https://formspree.io/f/mzdkoolz";
+  const PRIORITY_LABELS = {1:"Low",2:"Moderate",3:"Standard",4:"High",5:"Urgent"};
+
+  let priority = 3;
+
+  // Custom type toggle
+  document.getElementById("collateralType").addEventListener("change", function() {
+    const custom = document.getElementById("customType");
+    if (this.value === "Custom / Other") {
+      custom.classList.remove("hidden");
+    } else {
+      custom.classList.add("hidden");
+      custom.value = "";
+    }
+  });
+
+  // Priority buttons
+  document.getElementById("priorityRow").addEventListener("click", function(e) {
+    const btn = e.target.closest(".priority-btn");
+    if (!btn) return;
+    priority = parseInt(btn.dataset.val);
+    document.querySelectorAll(".priority-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+  });
+
+  // Form submit
+  document.getElementById("requestForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const type = document.getElementById("collateralType").value;
+    const customType = document.getElementById("customType").value;
+    const audience = document.getElementById("audience").value;
+    const partner = document.getElementById("partnerOrEvent").value;
+    const usage = document.getElementById("usage").value;
+    const notes = document.getElementById("notes").value;
+
+    if (!name || !type || !audience || !usage.trim()) return;
+    if (type === "Custom / Other" && !customType.trim()) return;
+
+    const btn = document.getElementById("submitBtn");
+    btn.disabled = true;
+    btn.textContent = "Submitting...";
+
+    const collateral = type === "Custom / Other" ? "Custom: " + customType : type;
+
+    try {
+      const res = await fetch(FORMSPREE, {
+        method: "POST",
+        headers: {"Content-Type":"application/json","Accept":"application/json"},
+        body: JSON.stringify({
+          "Requested By": name,
+          "Collateral Type": collateral,
+          "Audience": audience,
+          "Partner or Event": partner || "N/A",
+          "How It Will Be Used": usage,
+          "Priority": priority + "/5 (" + PRIORITY_LABELS[priority] + ")",
+          "Additional Notes": notes || "None",
+          "_subject": "Collateral Request: " + collateral + " — from " + name
+        })
+      });
+
+      if (res.ok) {
+        document.getElementById("formView").classList.add("hidden");
+        document.getElementById("successView").classList.remove("hidden");
+      } else {
+        throw new Error("fail");
+      }
+    } catch(err) {
+      document.getElementById("errorMsg").classList.remove("hidden");
+      btn.disabled = false;
+      btn.textContent = "Submit Request";
+    }
+  });
+
+  // Reset
+  document.getElementById("resetBtn").addEventListener("click", function() {
+    document.getElementById("requestForm").reset();
+    document.getElementById("customType").classList.add("hidden");
+    document.getElementById("errorMsg").classList.add("hidden");
+    document.getElementById("submitBtn").disabled = false;
+    document.getElementById("submitBtn").textContent = "Submit Request";
+    priority = 3;
+    document.querySelectorAll(".priority-btn").forEach(b => b.classList.remove("active"));
+    document.querySelector('.priority-btn[data-val="3"]').classList.add("active");
+    document.getElementById("successView").classList.add("hidden");
+    document.getElementById("formView").classList.remove("hidden");
+  });
+</script>
+
+</body>
+</html>
